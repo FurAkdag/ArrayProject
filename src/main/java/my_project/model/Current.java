@@ -33,7 +33,11 @@ public class Current extends GraphicalObject {
         x += add;
     }
 
-    public void delete(){
+    public void invisible(){
         viewController.removeDrawable(this);
+    }
+
+    public void visible(){
+        viewController.draw(this);
     }
 }

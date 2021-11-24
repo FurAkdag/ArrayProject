@@ -33,23 +33,26 @@ public class InputManager extends InteractiveGraphicalObject {
 
     @Override
     public void keyReleased(int key) {
-        if(key == KeyEvent.VK_A) {
+        if(key == KeyEvent.VK_LEFT) {
             programController.moveCurrent("left");
-        }else if(key == KeyEvent.VK_D){
+        }else if(key == KeyEvent.VK_RIGHT){
             programController.moveCurrent("right");
-        }else if(key == KeyEvent.VK_S){
+        }else if(key == KeyEvent.VK_DOWN){
             programController.moveCurrent("down");
-        }else if(key == KeyEvent.VK_W){
+        }else if(key == KeyEvent.VK_UP){
             programController.moveCurrent("up");
-        }
-        /*else if(key == KeyEvent.VK_S){
-            programController.addBallToLast();
+        }else if(key == KeyEvent.VK_W){
+            programController.setSize("Bigger");
+        }else if(key == KeyEvent.VK_S){
+            programController.setSize("Smaller");
+        }else if(key == KeyEvent.VK_F){
+            programController.fillIt();
+        }else if(key == KeyEvent.VK_G){
+            programController.deleteIT();
+        }else if(key == KeyEvent.VK_E){
+            programController.fillAll();
         }else if(key == KeyEvent.VK_R){
-            programController.removeBallFromCurrent();
-        }else if(key == KeyEvent.VK_C){
-            programController.changeCurrent();
-        }else if(key == KeyEvent.VK_B){
-            programController.returnCurrent();
-        }*/
+            programController.deleteAll();
+        }
     }
 }

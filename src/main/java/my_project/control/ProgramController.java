@@ -18,6 +18,8 @@ public class ProgramController {
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private ArrayObject[][] field;
     private Current current;
+    private int arrayX;
+    private int arrayY;
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -28,8 +30,10 @@ public class ProgramController {
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
         field = new ArrayObject[5][10];
-        current = new Current(90,90,viewController);
+        current = new Current(75,75,viewController);
         new InputManager(this, viewController);
+        arrayX = 0;
+        arrayY = 0;
     }
 
     /**
@@ -47,14 +51,64 @@ public class ProgramController {
     public void moveCurrent(String pos){
         switch (pos){
             case "up":
-                if(current.getY() < 90) current.addY(-50); break;
+                if(arrayY != 0) {
+                    current.addY(-50);
+                    arrayY--;
+                }
+                break;
             case "down":
-                if(current.getY() < 290) current.addY(50); break;
+                if(arrayY != 4) {
+                    current.addY(50);
+                    arrayY++;
+                }
+                break;
             case "right":
-                if(current.getX() < 590) current.addX(50); break;
+                if(arrayX != 9) {
+                    current.addX(50);
+                    arrayX++;
+                }
+                break;
             case "left":
-                if(current.getX() < 90) current.addX(-50); break;
+                if(arrayX != 0) {
+                    current.addX(-50);
+                    arrayX--;
+                }
+                break;
         }
+    }
+
+    public void setSize(String size){
+        if(field[arrayY][arrayX].isFilled()) {
+            if (size.equals("Bigger")) {
+                field[arrayY][arrayX].getBigger();
+            } else if (size.equals("Smaller")) {
+                field[arrayY][arrayX].getSmaller();
+            }
+        }
+    }
+
+    public void fillIt(){
+        field[arrayY][arrayX].fill();
+    }
+
+    public void fillAll(){
+        for(int i = 0;i < 10;i++){
+            for(int j = 0;j < 5; j++){
+                field[j][i].fill();
+            }
+        }
+    }
+
+    public void deleteAll(){
+        for(int i = 0;i < 10;i++){
+            for(int j = 0;j < 5; j++){
+                field[j][i].delete();
+            }
+        }
+    }
+
+    public void deleteIT(){
+        field[arrayY][arrayX].delete();
     }
     /**
      * Aufruf mit jeder Frame

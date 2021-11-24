@@ -17,11 +17,16 @@ public class ArrayObject extends GraphicalObject {
      * @param x Startposition x
      * @param y Startposition y
      */
+    private int r;
+    private boolean filled;
+
     private ViewController viewController;
 
     public ArrayObject(double posX, double posY, ViewController viewController){
-        this.x = posX;
-        this.y = posY;
+        this.x = posX*50 + 100;
+        this.y = posY*50 + 100;
+        r = 10;
+        filled = false;
         this.viewController = viewController;
         viewController.draw(this);
     }
@@ -32,9 +37,40 @@ public class ArrayObject extends GraphicalObject {
      */
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.setCurrentColor(Color.BLACK);
-        drawTool.drawFilledRectangle(100 + 50*x, 100 + 50*y, 30,30);
+        if(filled){
+            drawTool.setCurrentColor(Color.RED);
+        }else{
+            drawTool.setCurrentColor(Color.BLACK);
+        }
+
+        drawTool.drawFilledCircle(x, y, r);
     }
+
+    public void getBigger(){
+        if(r < 25){
+            r += 5;
+        }
+    }
+
+    public void getSmaller(){
+        if(r > 5){
+            r -= 5;
+        }
+    }
+
+    public void fill(){
+        filled = true;
+    }
+
+    public void delete(){
+        filled = false;
+        r = 10;
+    }
+
+    public boolean isFilled() {
+        return filled;
+    }
+
 
     /**
      * Wird mit jeder Frame vom Framework aufgerufen und dient zur Manipulation des Objekts im Verlauf
