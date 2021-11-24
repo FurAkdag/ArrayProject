@@ -1,5 +1,6 @@
 package my_project.model;
 
+import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
@@ -9,16 +10,20 @@ import java.awt.*;
  * Repräsentiert eine Kugel (einen Kreis), der in eine Schlange eingefügt werden soll. Dabei muss jeder QueueBall immer
  * seinen Vorgänger kennen, damit er zu ihm Abstand halten kann.
  */
-public class Ball extends GraphicalObject {
+public class ArrayObject extends GraphicalObject {
 
     /**
      * Erzeugt einen neuen QueueBall
      * @param x Startposition x
      * @param y Startposition y
      */
-    public Ball(double x, double y){
-        this.x = x;
-        this.y = y;
+    private ViewController viewController;
+
+    public ArrayObject(double posX, double posY, ViewController viewController){
+        this.x = posX;
+        this.y = posY;
+        this.viewController = viewController;
+        viewController.draw(this);
     }
 
 
@@ -27,10 +32,8 @@ public class Ball extends GraphicalObject {
      */
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.drawFilledCircle(x,y,20);
-        drawTool.setCurrentColor(Color.RED);
-        drawTool.drawCircle(x,y,10);
-        drawTool.drawCircle(x,y,5);
+        drawTool.setCurrentColor(Color.BLACK);
+        drawTool.drawFilledRectangle(100 + 50*x, 100 + 50*y, 30,30);
     }
 
     /**
