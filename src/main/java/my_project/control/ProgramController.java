@@ -87,6 +87,24 @@ public class ProgramController {
         }
     }
 
+    public void setEverySize(String size){
+        if(field[arrayY][arrayX].isFilled()) {
+            if (size.equals("All Bigger")) {
+                for(int i = 0;i < 10;i++){
+                    for(int j = 0;j < 5; j++){
+                        field[j][i].getBigger();
+                    }
+                }
+            } else if (size.equals("All Smaller")) {
+                for(int i = 0;i < 10;i++){
+                    for(int j = 0;j < 5; j++){
+                        field[j][i].getSmaller();
+                    }
+                }
+            }
+        }
+    }
+
     public void fillIt(){
         field[arrayY][arrayX].fill();
     }
@@ -114,6 +132,30 @@ public class ProgramController {
      * Aufruf mit jeder Frame
      * @param dt Zeit seit letzter Frame
      */
+    public void visibility(){
+        if(field[arrayY][arrayX].isVanish()){
+            field[arrayY][arrayX].setVanish(false);
+        }else{
+            field[arrayY][arrayX].setVanish(true);
+        }
+    }
+
+    public void allGone(){
+        for(int i = 0;i < 10;i++){
+            for(int j = 0;j < 5; j++){
+                field[j][i].setVanish(true);
+            }
+        }
+    }
+
+    public void getBack(){
+        for(int i = 0;i < 10;i++){
+            for(int j = 0;j < 5; j++){
+                field[j][i].setVanish(false);
+            }
+        }
+    }
+
     public void updateProgram(double dt){
 
     }

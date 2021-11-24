@@ -19,16 +19,21 @@ public class ArrayObject extends GraphicalObject {
      */
     private int r;
     private boolean filled;
+    private int a;
+    private boolean vanish;
 
     private ViewController viewController;
 
     public ArrayObject(double posX, double posY, ViewController viewController){
         this.x = posX*50 + 100;
         this.y = posY*50 + 100;
+        a = 255;
         r = 10;
         filled = false;
+        vanish = false;
         this.viewController = viewController;
         viewController.draw(this);
+
     }
 
 
@@ -38,9 +43,9 @@ public class ArrayObject extends GraphicalObject {
     @Override
     public void draw(DrawTool drawTool) {
         if(filled){
-            drawTool.setCurrentColor(Color.RED);
+            drawTool.setCurrentColor(255,0,0,a);
         }else{
-            drawTool.setCurrentColor(Color.BLACK);
+            drawTool.setCurrentColor(0,0,0,255);
         }
 
         drawTool.drawFilledCircle(x, y, r);
@@ -65,12 +70,20 @@ public class ArrayObject extends GraphicalObject {
     public void delete(){
         filled = false;
         r = 10;
+        a = 255;
     }
 
     public boolean isFilled() {
         return filled;
     }
 
+    public void setVanish(boolean vanish) {
+        this.vanish = vanish;
+    }
+
+    public boolean isVanish() {
+        return vanish;
+    }
 
     /**
      * Wird mit jeder Frame vom Framework aufgerufen und dient zur Manipulation des Objekts im Verlauf
@@ -79,7 +92,18 @@ public class ArrayObject extends GraphicalObject {
      */
     @Override
     public void update(double dt){
+        if(filled) {
+            if (vanish) {
 
+                a -= 300 * dt;
+                a = Math.max(0, a);
+            } else {
+                a += 300 * dt;
+                a = Math.min(255, a);
+            }
+        }
     }
 
 }
+
+

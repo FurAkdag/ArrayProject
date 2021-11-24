@@ -45,6 +45,10 @@ public class InputManager extends InteractiveGraphicalObject {
             programController.setSize("Bigger");
         }else if(key == KeyEvent.VK_S){
             programController.setSize("Smaller");
+        }else if(key == KeyEvent.VK_Z){
+            programController.setEverySize("All Bigger");
+        }else if(key == KeyEvent.VK_H){
+            programController.setEverySize("All Smaller");
         }else if(key == KeyEvent.VK_F){
             programController.fillIt();
         }else if(key == KeyEvent.VK_G){
@@ -53,6 +57,12 @@ public class InputManager extends InteractiveGraphicalObject {
             programController.fillAll();
         }else if(key == KeyEvent.VK_R){
             programController.deleteAll();
+        }else if(key == KeyEvent.VK_A){
+            programController.visibility();
+        }else if(key == KeyEvent.VK_C){
+            programController.getBack();
+        }else if(key == KeyEvent.VK_V){
+            programController.allGone();
         }
     }
 }
